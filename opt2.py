@@ -49,14 +49,26 @@ class WeatherClient(object):
         '''
         resultats = {}
         resultats["actual"]={}
-        resultats["futur1"]={}
-        resultats["futur2"]={}
         resultats["actual"]["data"] = data
         resultats["actual"]["weekday"] = weekday
         resultats["actual"]["hour"] = hour
         resultats["actual"]["temp"] = temp
         resultats["actual"]["humidity"] = humidity
         resultats["actual"]["condicio"] = condicio
+
+        resultats["futur1"]={}
+
+        forecast2 = forecast.find_next_siblings("forecast")
+        data2 = forecast2.find("pretty").text
+        weekday2 = forecast.find("weekday_name").text
+        hour2 = forecast.find("civil").text
+        condicio2 = forecast.find("condition").text
+        temp2 = forecast.find("temp").find("metric").text
+        humidity2 = forecast.find("humidity").text
+
+        print data2
+
+        resultats["futur2"]={}
 
         print resultats["actual"]["weekday"] + "'s forecast at",resultats["actual"]["hour"]+":"
         print "*-----------------------------*"
